@@ -49,7 +49,6 @@ def getHistoricalSample(start, end, increment):
 
     DB = DBController('Transactions.db')
     first_run = True
-
     for block_counter in range(start, end, increment):
         block = w3.eth.get_block(block_counter)
         tx_df = pd.DataFrame(columns=['blockHash', 'blockNumber', 'from', 'gas', 'gasPrice', 'hash', 'input', 'nonce', 'to', 'transactionIndex', 'value', 'type', 'v', 'r', 's'])
@@ -67,19 +66,18 @@ def getHistoricalSample(start, end, increment):
         first_run = False
 
 
-args = sys.argv[1:]
+argv = sys.argv[1:]
 options = 'sei:'
 start, end, increment = 0, 0, 0
-arguments, values = getopt.getopt(args, options)
-for currentArgument, currentValue in arguments:
-    if currentArgument == '-s':
-        start = currentValue
+args, values = getopt.getopt(argv, 's:e:i:')
+for currentArgument, currentValue in args:
+    if currentArgument in ['-s']:
+        start = int(currentValue)
 
-    elif currentArgument == '-e':
-        end = currentValue
+    elif currentArgument in ['-e']:
+        end = int(currentValue)
 
-    elif currentArgument == '-i':
-        increment = currentValue
-
+    elif currentArgument in ['-i']:
+        increment = int(currentValue)
 
 getHistoricalSample(start, end, increment)
