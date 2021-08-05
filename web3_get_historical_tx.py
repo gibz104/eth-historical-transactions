@@ -67,7 +67,6 @@ def getHistoricalSample(start, end, increment):
 
 
 argv = sys.argv[1:]
-options = 'sei:'
 start, end, increment = 0, 0, 0
 args, values = getopt.getopt(argv, 's:e:i:')
 for currentArgument, currentValue in args:
